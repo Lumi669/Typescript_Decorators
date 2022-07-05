@@ -1,10 +1,13 @@
-// with decorator
-function Log(constructor: Function) {
-  console.log("now is printing from decorator...");
-  console.log("constructor = ", constructor);
+// create a decorator factory
+function Log(logString: string) {
+  return function (constructor: Function) {
+    // console.log("now is printing from decorator...");
+    console.log("logString = ", logString);
+    console.log("constructor = ", constructor);
+  };
 }
 
-@Log
+@Log("LOGIN - PERSON")
 class Person {
   name = "Rose";
 
