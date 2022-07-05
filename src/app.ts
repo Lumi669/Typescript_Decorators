@@ -1,17 +1,13 @@
-function Logger(constructor: Function) {
-  console.log('Logging...');
-  console.log(constructor);
-}
+// without decorator
 
-@Logger
 class Person {
-  name = 'Max';
+  name = "Rose";
 
   constructor() {
-    console.log('Creating person object...');
+    console.log("Create a person object...");
   }
 }
 
-const pers = new Person();
+const aa = new Person();
 
-console.log(pers);
+console.log("aa = ", aa);
