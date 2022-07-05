@@ -6,10 +6,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 function WithTemplate(template, hookId) {
-    return function (_) {
+    return function (constructor) {
+        const p = new constructor();
         const hookElement = document.getElementById(hookId);
         if (hookElement) {
             hookElement.innerHTML = template;
+            hookElement.querySelector("h1").textContent = p.name;
         }
     };
 }
@@ -20,6 +22,6 @@ let Person = class Person {
     }
 };
 Person = __decorate([
-    WithTemplate("<p>This is from WithTemplate </p>", "apple")
+    WithTemplate("<h1>This is from WithTemplate </h1>", "apple")
 ], Person);
 //# sourceMappingURL=app.js.map

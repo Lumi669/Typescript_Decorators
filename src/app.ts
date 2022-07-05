@@ -8,17 +8,19 @@
 // }
 
 function WithTemplate(template: string, hookId: string) {
-  return function (_: Function) {
+  return function (constructor: any) {
+    const p = new constructor();
     const hookElement = document.getElementById(hookId);
     if (hookElement) {
       hookElement.innerHTML = template;
+      hookElement.querySelector("h1")!.textContent = p.name;
     }
   };
 }
 
 // @Log("LOGIN - PERSON")
 
-@WithTemplate("<p>This is from WithTemplate </p>", "apple")
+@WithTemplate("<h1>This is from WithTemplate </h1>", "apple")
 class Person {
   name = "Rose";
 
