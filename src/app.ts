@@ -50,11 +50,12 @@ function Logger(target: any, propertyName: string | Symbol) {
 
 class Product {
   @Logger
-  static title: string = "baubu";
+  title: string;
   private _price: number;
 
   constructor(p: number) {
     this._price = p;
+    this.title = "bb";
   }
 
   setPrice(v: number) {
@@ -72,5 +73,3 @@ class Product {
     return this._price * (1 + tax);
   }
 }
-
-console.log("Product.title = ", Product.title);

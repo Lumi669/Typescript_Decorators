@@ -44,6 +44,7 @@ function Logger(target, propertyName) {
 class Product {
     constructor(p) {
         this._price = p;
+        this.title = "bb";
     }
     setPrice(v) {
         if (v > 0) {
@@ -58,9 +59,7 @@ class Product {
         return this._price * (1 + tax);
     }
 }
-Product.title = "baubu";
 __decorate([
     Logger
-], Product, "title", void 0);
-console.log("Product.title = ", Product.title);
+], Product.prototype, "title", void 0);
 //# sourceMappingURL=app.js.map
