@@ -35,4 +35,32 @@ Person = __decorate([
     Log("LOGIN - PERSON"),
     WithTemplate("<h1>This is from WithTemplate </h1>", "apple")
 ], Person);
+function Logger(target, propertyName) {
+    console.log("Property decorator called . . .");
+    console.log("target = ", target);
+    console.log("type of target = ", typeof target);
+    console.log(" propertyName = ", propertyName);
+}
+class Product {
+    constructor(p) {
+        this._price = p;
+    }
+    setPrice(v) {
+        if (v > 0) {
+            this._price = v;
+        }
+        throw new Error("");
+    }
+    getPrice() {
+        return this._price;
+    }
+    getPriceWithTax(tax) {
+        return this._price * (1 + tax);
+    }
+}
+Product.title = "baubu";
+__decorate([
+    Logger
+], Product, "title", void 0);
+console.log("Product.title = ", Product.title);
 //# sourceMappingURL=app.js.map

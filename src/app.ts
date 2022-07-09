@@ -38,3 +38,39 @@ class Person {
 //const aa = new Person();
 
 //console.log("aa = ", aa);
+
+//define a property decorator
+function Logger(target: any, propertyName: string | Symbol) {
+  console.log("Property decorator called . . .");
+  console.log("target = ", target);
+  console.log("type of target = ", typeof target);
+
+  console.log(" propertyName = ", propertyName);
+}
+
+class Product {
+  @Logger
+  static title: string = "baubu";
+  private _price: number;
+
+  constructor(p: number) {
+    this._price = p;
+  }
+
+  setPrice(v: number) {
+    if (v > 0) {
+      this._price = v;
+    }
+    throw new Error("");
+  }
+
+  getPrice() {
+    return this._price;
+  }
+
+  getPriceWithTax(tax: number) {
+    return this._price * (1 + tax);
+  }
+}
+
+console.log("Product.title = ", Product.title);
