@@ -44,8 +44,20 @@ function Logger(target: any, propertyName: string | Symbol) {
   console.log("Property decorator called . . .");
   console.log("target = ", target);
   console.log("type of target = ", typeof target);
-
   console.log(" propertyName = ", propertyName);
+}
+
+//define an accessor decorator
+function Logger2(target: any, name: string, descriptor: PropertyDescriptor) {
+  console.log("Accessor decorator is called . . . ");
+  console.log("target from accessor decorator = ", target);
+  console.log("type of accessor decorator target = ", typeof target);
+  console.log("name from accessor decorator = ", name);
+  console.log("descriptor from accessor decorator = ", descriptor);
+  console.log(
+    "typeof descriptor from accessor decorator = ",
+    typeof descriptor
+  );
 }
 
 class Product {
@@ -58,15 +70,12 @@ class Product {
     this.title = "bb";
   }
 
-  setPrice(v: number) {
+  @Logger2
+  set price(v: number) {
     if (v > 0) {
       this._price = v;
     }
     throw new Error("");
-  }
-
-  getPrice() {
-    return this._price;
   }
 
   getPriceWithTax(tax: number) {

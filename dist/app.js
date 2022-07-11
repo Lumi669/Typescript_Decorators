@@ -41,19 +41,24 @@ function Logger(target, propertyName) {
     console.log("type of target = ", typeof target);
     console.log(" propertyName = ", propertyName);
 }
+function Logger2(target, name, descriptor) {
+    console.log("Accessor decorator is called . . . ");
+    console.log("target from accessor decorator = ", target);
+    console.log("type of accessor decorator target = ", typeof target);
+    console.log("name from accessor decorator = ", name);
+    console.log("descriptor from accessor decorator = ", descriptor);
+    console.log("typeof descriptor from accessor decorator = ", typeof descriptor);
+}
 class Product {
     constructor(p) {
         this._price = p;
         this.title = "bb";
     }
-    setPrice(v) {
+    set price(v) {
         if (v > 0) {
             this._price = v;
         }
         throw new Error("");
-    }
-    getPrice() {
-        return this._price;
     }
     getPriceWithTax(tax) {
         return this._price * (1 + tax);
@@ -62,4 +67,7 @@ class Product {
 __decorate([
     Logger
 ], Product.prototype, "title", void 0);
+__decorate([
+    Logger2
+], Product.prototype, "price", null);
 //# sourceMappingURL=app.js.map
