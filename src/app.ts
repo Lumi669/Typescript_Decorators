@@ -12,9 +12,11 @@ function Log(logString: string) {
 
 function WithTemplate(template: string, hookId: string) {
   console.log("from WithTemplate decorator factory");
-  return function (originalconstructor: any) {
+  return function <T extends { new (...args: any[]): { name: string } }>(
+    originalconstructor: T
+  ) {
     return class extends originalconstructor {
-      constructor() {
+      constructor(..._: any[]) {
         super();
         console.log("from WithTamplate decorator ........");
         const hookElement = document.getElementById(hookId);
