@@ -73,6 +73,15 @@ function Logger3(
   console.log("descriptor from method decorator = ", descriptor);
 }
 
+//define a parameter decorator
+function Logger4(target: any, name: string | symbol, position: number) {
+  console.log("Parameter decorator is called . . . ");
+  console.log("target from parameter decorator = ", target);
+  console.log("type of parameter decorator target = ", typeof target);
+  console.log("name from parameter decorator = ", name);
+  console.log("descriptor from parameter decorator = ", position);
+}
+
 class Product {
   @Logger
   title: string;
@@ -92,7 +101,7 @@ class Product {
   }
 
   @Logger3
-  getPriceWithTax(tax: number) {
+  getPriceWithTax(@Logger4 tax: number) {
     return this._price * (1 + tax);
   }
 }
