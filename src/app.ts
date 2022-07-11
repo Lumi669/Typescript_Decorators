@@ -17,7 +17,6 @@ function WithTemplate(template: string, hookId: string) {
       constructor() {
         super();
         console.log("from WithTamplate decorator ........");
-
         const hookElement = document.getElementById(hookId);
         if (hookElement) {
           hookElement.innerHTML = template;
