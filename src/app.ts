@@ -60,6 +60,19 @@ function Logger2(target: any, name: string, descriptor: PropertyDescriptor) {
   );
 }
 
+//difine a method accessor
+function Logger3(
+  target: any,
+  name: string | symbol,
+  descriptor: PropertyDescriptor
+) {
+  console.log("Method decorator is called . . . ");
+  console.log("target from method decorator = ", target);
+  console.log("type of method decorator target = ", typeof target);
+  console.log("name from method decorator = ", name);
+  console.log("descriptor from method decorator = ", descriptor);
+}
+
 class Product {
   @Logger
   title: string;
@@ -78,6 +91,7 @@ class Product {
     throw new Error("");
   }
 
+  @Logger3
   getPriceWithTax(tax: number) {
     return this._price * (1 + tax);
   }

@@ -49,6 +49,13 @@ function Logger2(target, name, descriptor) {
     console.log("descriptor from accessor decorator = ", descriptor);
     console.log("typeof descriptor from accessor decorator = ", typeof descriptor);
 }
+function Logger3(target, name, descriptor) {
+    console.log("Method decorator is called . . . ");
+    console.log("target from method decorator = ", target);
+    console.log("type of method decorator target = ", typeof target);
+    console.log("name from method decorator = ", name);
+    console.log("descriptor from method decorator = ", descriptor);
+}
 class Product {
     constructor(p) {
         this._price = p;
@@ -70,4 +77,7 @@ __decorate([
 __decorate([
     Logger2
 ], Product.prototype, "price", null);
+__decorate([
+    Logger3
+], Product.prototype, "getPriceWithTax", null);
 //# sourceMappingURL=app.js.map
