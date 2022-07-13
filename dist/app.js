@@ -97,15 +97,30 @@ __decorate([
     Logger3,
     __param(0, Logger4)
 ], Product.prototype, "getPriceWithTax", null);
+function Autobind(_, _2, descriptor) {
+    const originalMethod = descriptor.value;
+    const adjustDescriptor = {
+        configurable: true,
+        enumerable: false,
+        get() {
+            const boundFn = originalMethod.bind(this);
+            return boundFn;
+        },
+    };
+    return adjustDescriptor;
+}
 class Printer {
     constructor() {
-        this.message = "This works";
+        this.message = "This worksss";
     }
     showMessage() {
         console.log("this.message = ", this.message);
     }
 }
+__decorate([
+    Autobind
+], Printer.prototype, "showMessage", null);
 const p = new Printer();
 const button = document.querySelector("button");
-button.addEventListener("click", p.showMessage.bind(p));
+button.addEventListener("click", p.showMessage);
 //# sourceMappingURL=app.js.map

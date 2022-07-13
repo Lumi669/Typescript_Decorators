@@ -109,9 +109,24 @@ class Product {
   }
 }
 
+//create an autobind decorator
+function Autobind(_: any, _2: string, descriptor: PropertyDescriptor) {
+  const originalMethod = descriptor.value;
+  const adjustDescriptor = {
+    configurable: true,
+    enumerable: false,
+    get() {
+      const boundFn = originalMethod.bind(this);
+      return boundFn;
+    },
+  };
+  return adjustDescriptor;
+}
 // create a class Printer
 class Printer {
-  message = "This works";
+  message = "This worksss";
+
+  @Autobind //add Autobind decorator
   showMessage() {
     console.log("this.message = ", this.message);
   }
@@ -120,4 +135,9 @@ class Printer {
 const p = new Printer();
 // p.showMessage();
 const button = document.querySelector("button")!;
-button.addEventListener("click", p.showMessage.bind(p));
+
+//javascript way to bind
+// button.addEventListener("click", p.showMessage.bind(p));
+
+//decorator way to bind
+button.addEventListener("click", p.showMessage);
