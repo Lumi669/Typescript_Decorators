@@ -43,68 +43,81 @@ const aa = new Person();
 console.log("aa = ", aa);
 
 // define a property decorator
-// function Logger(target: any, propertyName: string | Symbol) {
-//   console.log("Property decorator called . . .");
-//   console.log("target = ", target);
-//   console.log("type of target = ", typeof target);
-//   console.log(" propertyName = ", propertyName);
-// }
+function Logger(target: any, propertyName: string | Symbol) {
+  console.log("Property decorator called . . .");
+  console.log("target = ", target);
+  console.log("type of target = ", typeof target);
+  console.log(" propertyName = ", propertyName);
+}
 
-// //define an accessor decorator
-// function Logger2(target: any, name: string, descriptor: PropertyDescriptor) {
-//   console.log("Accessor decorator is called . . . ");
-//   console.log("target from accessor decorator = ", target);
-//   console.log("type of accessor decorator target = ", typeof target);
-//   console.log("name from accessor decorator = ", name);
-//   console.log("descriptor from accessor decorator = ", descriptor);
-//   console.log(
-//     "typeof descriptor from accessor decorator = ",
-//     typeof descriptor
-//   );
-// }
+//define an accessor decorator
+function Logger2(target: any, name: string, descriptor: PropertyDescriptor) {
+  console.log("Accessor decorator is called . . . ");
+  console.log("target from accessor decorator = ", target);
+  console.log("type of accessor decorator target = ", typeof target);
+  console.log("name from accessor decorator = ", name);
+  console.log("descriptor from accessor decorator = ", descriptor);
+  console.log(
+    "typeof descriptor from accessor decorator = ",
+    typeof descriptor
+  );
+}
 
-// //difine a method accessor
-// function Logger3(
-//   target: any,
-//   name: string | symbol,
-//   descriptor: PropertyDescriptor
-// ) {
-//   console.log("Method decorator is called . . . ");
-//   console.log("target from method decorator = ", target);
-//   console.log("type of method decorator target = ", typeof target);
-//   console.log("name from method decorator = ", name);
-//   console.log("descriptor from method decorator = ", descriptor);
-// }
+//difine a method accessor
+function Logger3(
+  target: any,
+  name: string | symbol,
+  descriptor: PropertyDescriptor
+) {
+  console.log("Method decorator is called . . . ");
+  console.log("target from method decorator = ", target);
+  console.log("type of method decorator target = ", typeof target);
+  console.log("name from method decorator = ", name);
+  console.log("descriptor from method decorator = ", descriptor);
+}
 
-// //define a parameter decorator
-// function Logger4(target: any, name: string | symbol, position: number) {
-//   console.log("Parameter decorator is called . . . ");
-//   console.log("target from parameter decorator = ", target);
-//   console.log("type of parameter decorator target = ", typeof target);
-//   console.log("name from parameter decorator = ", name);
-//   console.log("descriptor from parameter decorator = ", position);
-// }
+//define a parameter decorator
+function Logger4(target: any, name: string | symbol, position: number) {
+  console.log("Parameter decorator is called . . . ");
+  console.log("target from parameter decorator = ", target);
+  console.log("type of parameter decorator target = ", typeof target);
+  console.log("name from parameter decorator = ", name);
+  console.log("descriptor from parameter decorator = ", position);
+}
 
-// class Product {
-//   @Logger
-//   title: string;
-//   private _price: number;
+class Product {
+  @Logger
+  title: string;
+  private _price: number;
 
-//   constructor(p: number) {
-//     this._price = p;
-//     this.title = "bb";
-//   }
+  constructor(p: number) {
+    this._price = p;
+    this.title = "bb";
+  }
 
-//   @Logger2
-//   set price(v: number) {
-//     if (v > 0) {
-//       this._price = v;
-//     }
-//     throw new Error("");
-//   }
+  @Logger2
+  set price(v: number) {
+    if (v > 0) {
+      this._price = v;
+    }
+    throw new Error("");
+  }
 
-//   @Logger3
-//   getPriceWithTax(@Logger4 tax: number) {
-//     return this._price * (1 + tax);
-//   }
-// }
+  @Logger3
+  getPriceWithTax(@Logger4 tax: number) {
+    return this._price * (1 + tax);
+  }
+}
+
+// create a class Printer
+class Printer {
+  message = "This works";
+  showMessage() {
+    console.log("this.message = ", this.message);
+  }
+}
+
+const p = new Printer();
+p.showMessage();
+const button = document.querySelector("button")!;
+button.addEventListener("click", p.showMessage);
