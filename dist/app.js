@@ -123,4 +123,21 @@ __decorate([
 const p = new Printer();
 const button = document.querySelector("button");
 button.addEventListener("click", p.showMessage);
+class Course {
+    constructor(t, p) {
+        this.title = t;
+        this.price = p;
+    }
+}
+const courseForm = document.querySelector("form");
+courseForm === null || courseForm === void 0 ? void 0 : courseForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const titleEl = document.getElementById("title");
+    const priceEl = document.getElementById("price");
+    const title = titleEl.value;
+    const price = +priceEl.value;
+    console.log("price = ", price);
+    const createdCourse = new Course(title, price);
+    console.log("createdCourse = ", createdCourse);
+});
 //# sourceMappingURL=app.js.map

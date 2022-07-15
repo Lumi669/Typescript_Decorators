@@ -141,3 +141,30 @@ const button = document.querySelector("button")!;
 
 //decorator way to bind
 button.addEventListener("click", p.showMessage);
+
+//demonstrate validation with decorators
+//here not use shorthand version because will add decorator to properties
+class Course {
+  title: string;
+  price: number;
+
+  constructor(t: string, p: number) {
+    this.title = t;
+    this.price = p;
+  }
+}
+
+const courseForm = document.querySelector("form")!;
+courseForm?.addEventListener("submit", (event) => {
+  //call event.preventDefault so that we don't submit the form
+  // and send no HTTP requests.
+  event.preventDefault();
+  const titleEl = document.getElementById("title") as HTMLInputElement;
+  const priceEl = document.getElementById("price") as HTMLInputElement;
+  const title = titleEl.value;
+  const price = +priceEl.value; //+ convert it to a number
+  console.log("price = ", price);
+  //create a new course instance
+  const createdCourse = new Course(title, price);
+  console.log("createdCourse = ", createdCourse);
+});
