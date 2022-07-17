@@ -132,6 +132,7 @@ function PositiveNumber(target, propName) {
 }
 function validate(obj) {
     const objValidatorConfig = registeredValidators[obj.constructor.name];
+    console.log("objValidatorConfig = ", objValidatorConfig);
     if (!objValidatorConfig) {
         return true;
     }
@@ -149,6 +150,7 @@ function validate(obj) {
             }
         }
     }
+    console.log("objValidatorConfig 222= ", objValidatorConfig);
     return isValid;
 }
 class Course {
