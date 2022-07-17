@@ -125,32 +125,31 @@ const button = document.querySelector("button");
 button.addEventListener("click", p.showMessage);
 const registeredValidators = {};
 function Required(target, propName) {
-    registeredValidators[target.constructor.name] = {
-        [propName]: ["required"],
-    };
+    registeredValidators[target.constructor.name] = Object.assign(Object.assign({}, registeredValidators[target.constructor.name]), { [propName]: ["required"] });
 }
 function PositiveNumber(target, propName) {
-    registeredValidators[target.constructor.name] = {
-        [propName]: ["positive"],
-    };
+    registeredValidators[target.constructor.name] = Object.assign(Object.assign({}, registeredValidators[target.constructor.name]), { [propName]: ["positive"] });
 }
 function validate(obj) {
     const objValidatorConfig = registeredValidators[obj.constructor.name];
     if (!objValidatorConfig) {
         return true;
     }
+    let isValid = true;
     for (const prop in objValidatorConfig) {
         console.log("prop = ", prop);
         for (const validator of objValidatorConfig[prop]) {
             switch (validator) {
                 case "required":
-                    return !!obj[prop];
+                    isValid = isValid && !!obj[prop];
+                    break;
                 case "positive":
-                    return obj[prop] > 0;
+                    isValid = isValid && obj[prop] > 0;
+                    break;
             }
         }
     }
-    return true;
+    return isValid;
 }
 class Course {
     constructor(t, p) {
@@ -172,6 +171,7 @@ courseForm === null || courseForm === void 0 ? void 0 : courseForm.addEventListe
     const title = titleEl.value;
     const price = +priceEl.value;
     console.log("price = ", price);
+    console.log("title = ", title);
     const createdCourse = new Course(title, price);
     if (!validate(createdCourse)) {
         alert("Invalid input, please try again!");
