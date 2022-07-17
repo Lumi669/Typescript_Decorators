@@ -144,8 +144,58 @@ button.addEventListener("click", p.showMessage);
 
 //demonstrate validation with decorators
 //here not use shorthand version because will add decorator to properties
+
+interface ValidatorConfig {
+  // Course: {
+  //   title: ['required'];
+  //   price: ['required'];
+  // }
+
+  //to generilize, so not has concreate value for each data item now
+  [property: string]: {
+    [validatableProp: string]: string[]; // value can be e.g ["requiered", 'positive]
+  };
+}
+
+const registeredValidators: ValidatorConfig = {};
+
+function Required(target: any, propName: string) {
+  registeredValidators[target.constructor.name] = {
+    [propName]: ["required"],
+  };
+}
+
+function PositiveNumber(target: any, propName: string) {
+  registeredValidators[target.constructor.name] = {
+    [propName]: ["positive"],
+  };
+}
+
+function validate(obj: any) {
+  const objValidatorConfig = registeredValidators[obj.constructor.name];
+  if (!objValidatorConfig) {
+    return true;
+  }
+  // let isValid = true;
+  for (const prop in objValidatorConfig) {
+    console.log("prop = ", prop);
+
+    for (const validator of objValidatorConfig[prop]) {
+      switch (validator) {
+        case "required":
+          return !!obj[prop];
+        case "positive":
+          return obj[prop] > 0;
+      }
+    }
+  }
+  return true;
+}
 class Course {
+  @Required
   title: string;
+
+  @PositiveNumber
   price: number;
 
   constructor(t: string, p: number) {
@@ -164,7 +214,12 @@ courseForm?.addEventListener("submit", (event) => {
   const title = titleEl.value;
   const price = +priceEl.value; //+ convert it to a number
   console.log("price = ", price);
-  //create a new course instance
+
   const createdCourse = new Course(title, price);
+
+  if (!validate(createdCourse)) {
+    alert("Invalid input, please try again!");
+    return;
+  }
   console.log("createdCourse = ", createdCourse);
 });
